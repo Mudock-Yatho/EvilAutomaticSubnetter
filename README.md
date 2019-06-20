@@ -1,5 +1,6 @@
 # EvilAutomaticSubnetter
-subnets given IP addr. (only beginning is needed.) and outputs data such as:
+This is named "Evil" simply because I didn't add any comments in the code, no documentation, no formatting, and uses a simple plain console.
+Subnets given IP addr. (only beginning is needed.) and outputs data such as:
   * Beginning of the IP addr. (inputted by user.)
   * Default Mask
   * Default CIDR
