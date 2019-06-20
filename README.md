@@ -13,3 +13,4 @@ Subnets given IP addr. (only beginning is needed.) and outputs data such as:
 # Notes
   * This was created for one of my classes.
   * This only does what I needed it to do, nothing more. (Doesn't calculate for A/B class networks.)
+  * Made for Visual Studio. (Used VS2017, but should work with other versions.)
