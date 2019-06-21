@@ -1,12 +1,13 @@
-#include "pch.h"
 #include <iostream>
 #include <cmath>
 #include <string>
+#include <Windows.h>
 /*
 	Only works for Class C for now, which is all my project needs.
 	Tested on 4 problems, works 100%.
 */
 int main() {
+	SetConsoleTitle(L"Evil Automatic Subnetter");
 	int ipBeginning, defaultCIDR, determinatingFactor, host, subnetBits, hostBits, customSubnet, customCIDR, increment;
 	std::string defaultMask;
 	char ipClass;
