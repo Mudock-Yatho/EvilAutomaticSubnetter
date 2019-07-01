@@ -12,5 +12,5 @@ Subnets given IP addr. (only beginning is needed.) and outputs data such as:
   * Custom CIDR
 # Notes
   * This was created for one of my classes.
-  * This only does what I needed it to do, nothing more. (Doesn't calculate for A/B class networks.)
+  * This only does what I needed it to do, nothing more. (Doesn't calculate for class A networks.)
   * Made for Visual Studio. (Used VS2019, but should work with any version.)
