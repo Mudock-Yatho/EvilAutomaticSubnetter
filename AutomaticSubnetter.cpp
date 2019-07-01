@@ -18,7 +18,6 @@ int main() {
 		std::cin.clear();
 		std::cin.ignore(1000, '\n');
 	}
-	// Making defaultMask automatic.
 	if ( ipBeginning >= 0 && ipBeginning < 128 ) {
 		ipClass = 'A'; // Class A.
 		defaultMask = "255.0.0.0";
@@ -44,7 +43,7 @@ int main() {
 		std::cin.clear();
 		std::cin.ignore(1000, '\n');
 	}
-	if (host == 1) { // My project only requires host-only for now.
+	if (host == 1) {
 		determinatingFactor = determinatingFactor + 2; // Add 2 when its per host.
 		// Formula for host bits: (2^number = closestToDeterminatingFactor).
 
@@ -64,40 +63,10 @@ int main() {
 		hostBits = lastCount;
 		if (ipClass == 'C') { // Class C method. (8)
 			subnetBits = 8 - lastCount;
-		} else if (ipClass == 'B') {
+		} else if (ipClass == 'B') { // Class B is 16.
 			subnetBits = 16 - lastCount;
 		}
 		// Formula for custom subnet mask: 128, 64, 32, 16, 8, 4, 2, 1 (Host = R->L)
-		if (hostBits == 1) { // Yes, I'm hard-coding this for now.
-			customSubnet = "255.255.255.254";
-			increment = 2;
-		} else if ( hostBits == 2 ) {
-			customSubnet = "255.255.255.252";
-			increment = 4;
-		} else if ( hostBits == 3) {
-			customSubnet = "255.255.255.248";
-			increment = 8;
-		} else if ( hostBits == 4) {
-			customSubnet = "255.255.255.240";
-			increment = 16;
-		} else if ( hostBits == 5) {
-			customSubnet = "255.255.255.224";
-			increment = 32;
-		} else if ( hostBits == 6) {
-			customSubnet = "255.255.255.192";
-			increment = 64;
-		} else if ( hostBits == 7) {
-			customSubnet = "255.255.255.128";
-			increment = 128;
-		} else if (hostBits == 8) {
-
-		} else if (hostBits == 9) {
-			customSubnet = "255.255.254.0";
-			increment = 2;
-		} else if (hostBits == 10) {
-			customSubnet = "255.255.252.0";
-			increment = 4;
-		}
 		// Formula for custom CIDR notation: defaultCIDR + subnetBits
 		customCIDR = defaultCIDR + subnetBits;
 	} else {
@@ -115,41 +84,41 @@ int main() {
 		subnetBits = lastCount;
 		if (ipClass == 'C') { // Class C method. (8)
 			hostBits = 8 - lastCount;
-		} else if (ipClass == 'B') {
+		} else if (ipClass == 'B') { // Class B is 16.
 			hostBits = 16 - lastCount;
-		}
-		// Formula for custom subnet mask: 128, 64, 32, 16, 8, 4, 2, 1 (Subnet = L->R)
-		if (hostBits == 1) { // Yes, I'm hard-coding this for now.
-			customSubnet = "255.255.255.254";
-			increment = 2;
-		} else if (hostBits == 2) {
-			customSubnet = "255.255.255.252";
-			increment = 4;
-		} else if (hostBits == 3) {
-			customSubnet = "255.255.255.248";
-			increment = 8;
-		} else if (hostBits == 4) {
-			customSubnet = "255.255.255.240";
-			increment = 16;
-		} else if (hostBits == 5) {
-			customSubnet = "255.255.255.224";
-			increment = 32;
-		} else if (hostBits == 6) {
-			customSubnet = "255.255.255.192";
-			increment = 64;
-		} else if (hostBits == 7) {
-			customSubnet = "255.255.255.128";
-			increment = 128;
-		} else if (hostBits == 8) {
-
-		} else if (hostBits == 9) {
-
-		} else if (hostBits == 10) {
-			customSubnet = "255.255.252.0";
-			increment = 4;
 		}
 		// Formula for custom CIDR notation: defaultCIDR + subnetBits
 		customCIDR = defaultCIDR + subnetBits;
+	}
+	if (hostBits == 1) { // Yes, I'm hard-coding this for now.
+		customSubnet = "255.255.255.254";
+		increment = 2;
+	} else if (hostBits == 2) {
+		customSubnet = "255.255.255.252";
+		increment = 4;
+	} else if (hostBits == 3) {
+		customSubnet = "255.255.255.248";
+		increment = 8;
+	} else if (hostBits == 4) {
+		customSubnet = "255.255.255.240";
+		increment = 16;
+	} else if (hostBits == 5) {
+		customSubnet = "255.255.255.224";
+		increment = 32;
+	} else if (hostBits == 6) {
+		customSubnet = "255.255.255.192";
+		increment = 64;
+	} else if (hostBits == 7) {
+		customSubnet = "255.255.255.128";
+		increment = 128;
+	} else if (hostBits == 8) {
+
+	} else if (hostBits == 9) {
+		customSubnet = "255.255.254.0";
+		increment = 2;
+	} else if (hostBits == 10) {
+		customSubnet = "255.255.252.0";
+		increment = 4;
 	}
 	if (host == 1) {
 		std::cout << "IP Class: " << ipClass << "\nDefault Mask: " << defaultMask
@@ -167,7 +136,7 @@ int main() {
 	} else if (ipClass == 'B') {
 		if (hostBits < 8) {
 			for (int count = 0; count < 9; count++) {
-				std::cout << "S" << count << ": 0." << count * increment << " | 0." << ((count + 1) * increment) - 1 << " | 0." << count * increment << " - 0." << ((count + 1) * increment) - 1 << "\n";
+				std::cout << "S" << count << ": 0." << count * increment << " | 0." << ((count + 1) * increment) - 1 << " | 0." << count * increment + 1 << " - 0." << ((count + 1) * increment) - 2 << "\n";
 			}
 		} else {
 			for (int count = 0; count < 9; count++) {
