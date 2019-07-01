@@ -70,6 +70,7 @@ int main() {
 		// Formula for custom subnet mask: 128, 64, 32, 16, 8, 4, 2, 1 (Host = R->L)
 		if (hostBits == 1) { // Yes, I'm hard-coding this for now.
 			customSubnet = "255.255.255.254";
+			increment = 2;
 		} else if ( hostBits == 2 ) {
 			customSubnet = "255.255.255.252";
 			increment = 4;
